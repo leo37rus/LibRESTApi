@@ -37,21 +37,28 @@ class LibController extends BaseController
     public function store(StoreLibRequest $request)
     {
         $libs = Lib::create($request->all());
+        if($libs->fails()){
+            return $this->sendError('Validation Error.', $libs->errors());
+        }
         return $this->sendResponse($libs->toArray(), 'Book created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Lib $lib)
+    public function show($id)
     {
-        return $this->sendResponse($lib->toArray(), 'Book retrieved successfully.');
+        $libs = Lib::find($id);
+        if (is_null($libs)) {
+            return $this->sendError('Book not found.');
+        }
+        return $this->sendResponse($libs->toArray(), 'Book retrieved successfully.');
     }
 
     /**
      * Edit the specified resource in storage.
      */
-    public function edit(Lib $lib)
+    public function edit(Lib $libs)
     {
         //
     }
@@ -60,15 +67,16 @@ class LibController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLibRequest $request, Lib $lib)
+    public function update(UpdateLibRequest $request, Lib $libs)
     {
-        //
+        $libs->update($request->all());
+        return $this->sendResponse($libs->toArray(), 'Book updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lib $lib)
+    public function destroy(Lib $libs)
     {
         //
     }
