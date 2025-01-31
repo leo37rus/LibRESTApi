@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Lib;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLibRequest;
 use App\Http\Requests\UpdateLibRequest;
+use App\Models\Lib;
 
 class LibController extends Controller
 {
@@ -13,16 +14,9 @@ class LibController extends Controller
      */
     public function index()
     {
-        //
+        return Lib::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,13 +34,6 @@ class LibController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lib $lib)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
