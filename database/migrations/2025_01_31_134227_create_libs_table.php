@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('book_author')->nullable();
             $table->string('book_year');
             $table->boolean('book_access')->default(true);
+            $table->timestamps();
         });
     }
 

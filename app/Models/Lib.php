@@ -13,6 +13,8 @@ class Lib extends Model
      * @var array
      */
     protected $fillable = [
-        'book_name','book_author'
+        'book_name',
+        'book_author',
+        'book_year',
     ];
 }
