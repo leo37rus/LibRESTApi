@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLibRequest;
 use App\Http\Requests\UpdateLibRequest;
 use App\Models\Lib;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\BaseController as BaseController;
 
 
@@ -18,6 +19,11 @@ class LibController extends BaseController
     public function index()
     {
         $libs = Lib::all();
+        /*if($libs['book_access'] == '0'){
+            return response()->json([
+                'massage' => 'forbidden',
+            ]);
+        }*/
         return $this->sendResponse($libs->toArray(), 'Books retrieved successfully.');
 
     }
@@ -37,9 +43,6 @@ class LibController extends BaseController
     public function store(StoreLibRequest $request)
     {
         $libs = Lib::create($request->all());
-        if($libs->fails()){
-            return $this->sendError('Validation Error.', $libs->errors());
-        }
         return $this->sendResponse($libs->toArray(), 'Book created successfully.');
     }
 
@@ -49,8 +52,11 @@ class LibController extends BaseController
     public function show($id)
     {
         $libs = Lib::find($id);
-        if (is_null($libs)) {
-            return $this->sendError('Book not found.');
+        if (is_null($libs))
+        {
+            return response()->json([
+                'massage' => 'Book not found',
+            ]);
         }
         return $this->sendResponse($libs->toArray(), 'Book retrieved successfully.');
     }
@@ -58,7 +64,7 @@ class LibController extends BaseController
     /**
      * Edit the specified resource in storage.
      */
-    public function edit(Lib $libs)
+    public function edit(Lib $lib)
     {
         //
     }
@@ -67,17 +73,18 @@ class LibController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLibRequest $request, Lib $libs)
+    public function update(UpdateLibRequest $request, Lib $lib)
     {
-        $libs->update($request->all());
-        return $this->sendResponse($libs->toArray(), 'Book updated successfully.');
+        $lib->update($request->all());
+        return $this->sendResponse($lib->toArray(), 'Book updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lib $libs)
+    public function destroy(Lib $lib)
     {
-        //
+        $lib->delete();
+        return $this->sendResponse($lib->toArray(), 'Product deleted successfully.');
     }
 }

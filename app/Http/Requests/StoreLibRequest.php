@@ -24,7 +24,7 @@ class StoreLibRequest extends FormRequest
         return [
             'book_name' => 'required',
             'book_author' => 'required',
-            'book_year' => 'required',
+            'book_year' => 'required'
         ];
     }
 }
