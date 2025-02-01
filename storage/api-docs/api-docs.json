@@ -1,0 +1,22 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "LibRESTApi",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/v1/libs": {
+            "post": {
+                "summary": "Создание",
+                "operationId": "395a43dbf9e9968707e0592909bac41a",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        }
+    }
+}

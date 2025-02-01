@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Requests\LibRequest;
 use App\Http\Requests\StoreLibRequest;
 use App\Http\Requests\UpdateLibRequest;
 use App\Http\Resources\V1\LibResource;
 use App\Models\Lib;
 use App\Repositories\LibsRepository;
-use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Response;
-
 
 
 class LibController extends BaseController
@@ -47,13 +46,13 @@ class LibController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(Lib $lib)
+    public function show($id)
     {
-        /*$libs = Lib::find($lib);
-        if (is_null($libs))
+        $lib = Lib::find($id);
+        if (is_null($lib))
         {
-            abort(403, 'Unauthorized action.');
-        }*/
+            abort(404, 'Not found.');
+        }
         return new LibResource($lib);
     }
 

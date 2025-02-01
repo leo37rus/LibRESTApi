@@ -24,6 +24,16 @@ class Kernel extends HttpKernel
     ];
 
     /**
+     * Roles middleware
+     * @var \class-string[]
+     */
+
+    protected $routeMiddleware = [
+        // Other middleware
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+    ];
+
+    /**
      * The application's route middleware groups.
      *
      * @var array<string, array<int, class-string|string>>

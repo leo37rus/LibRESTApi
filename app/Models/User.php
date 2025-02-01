@@ -18,10 +18,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'id',
+        'role'
     ];
+
+    /**
+     * Other model properties and methods
+     * @return mixed
+     */
+
+    public function getRoleAttribute()
+    {
+        return $this->attributes['role'];
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -29,8 +38,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+
     ];
 
     /**
@@ -39,7 +47,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+
     ];
 }

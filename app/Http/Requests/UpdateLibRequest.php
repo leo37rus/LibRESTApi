@@ -22,9 +22,9 @@ class UpdateLibRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'book_name' => 'required',
-            'book_author' => 'required',
-            'book_year' => 'required',
+            'book_name' => ['required', 'string', 'min:3', 'max:255'],
+            'book_author' => ['required', 'string', 'min:3', 'max:255'],
+            'book_year' => ['required', 'string', 'min:3', 'max:255'],
         ];
     }
 }
