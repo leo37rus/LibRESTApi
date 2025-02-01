@@ -6,13 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LibRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +16,17 @@ class LibRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'term' => ['sometimes', 'string', 'min:3', 'max:255'],
         ];
+    }
+
+    /**
+     * Return term search
+     *
+     * @return string|null
+     */
+    public function getTerm(): ?string
+    {
+        return $this->input('term');
     }
 }

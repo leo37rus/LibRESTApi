@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $book_name
+ * @property string $book_author
+ * @property string $book_year
+ */
 class Lib extends Model
 {
     /**

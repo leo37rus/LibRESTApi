@@ -2,38 +2,36 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\LibRequest;
 use App\Http\Requests\StoreLibRequest;
 use App\Http\Requests\UpdateLibRequest;
+use App\Http\Resources\V1\LibResource;
 use App\Models\Lib;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Repositories\LibsRepository;
 use App\Http\Controllers\BaseController as BaseController;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Response;
+
 
 
 class LibController extends BaseController
 {
+
+
     /**
      * Display a listing of the resource.
+     * @param LibRequest $request
+     * @param LibsRepository $repository
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function getList(LibRequest $request, LibsRepository $repository): AnonymousResourceCollection
     {
-        $libs = Lib::all();
-        /*if($libs['book_access'] == '0'){
-            return response()->json([
-                'massage' => 'forbidden',
-            ]);
-        }*/
-        return $this->sendResponse($libs->toArray(), 'Books retrieved successfully.');
 
-    }
+        if ($request->getTerm()) {
+            return LibResource::collection($repository->getByNameOrAuthor($request->getTerm()));
+        }
 
-    /**
-     * Create new resource in storage.
-     */
-    public function create(StoreLibRequest $request)
-    {
-        //
+        return LibResource::collection(Lib::all());
     }
 
 
@@ -43,30 +41,20 @@ class LibController extends BaseController
     public function store(StoreLibRequest $request)
     {
         $libs = Lib::create($request->all());
-        return $this->sendResponse($libs->toArray(), 'Book created successfully.');
+        return new LibResource($libs);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Lib $lib)
     {
-        $libs = Lib::find($id);
+        /*$libs = Lib::find($lib);
         if (is_null($libs))
         {
-            return response()->json([
-                'massage' => 'Book not found',
-            ]);
-        }
-        return $this->sendResponse($libs->toArray(), 'Book retrieved successfully.');
-    }
-
-    /**
-     * Edit the specified resource in storage.
-     */
-    public function edit(Lib $lib)
-    {
-        //
+            abort(403, 'Unauthorized action.');
+        }*/
+        return new LibResource($lib);
     }
 
 
@@ -76,7 +64,7 @@ class LibController extends BaseController
     public function update(UpdateLibRequest $request, Lib $lib)
     {
         $lib->update($request->all());
-        return $this->sendResponse($lib->toArray(), 'Book updated successfully.');
+        return new LibResource($lib);
     }
 
     /**
@@ -85,6 +73,7 @@ class LibController extends BaseController
     public function destroy(Lib $lib)
     {
         $lib->delete();
-        return $this->sendResponse($lib->toArray(), 'Product deleted successfully.');
+
+        return Response::noContent();
     }
 }

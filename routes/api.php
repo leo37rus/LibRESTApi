@@ -18,8 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/v1/libs', [\App\Http\Controllers\Api\V1\LibController::class],'index');
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
     Route::apiResource('libs', \App\Http\Controllers\Api\V1\LibController::class);
+    Route::get('libs', [\App\Http\Controllers\Api\V1\LibController::class, 'getList']);
 });
