@@ -3,19 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Lib;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+
 use Illuminate\Support\Facades\DB;
 
 /**
- * Репозиторий для работы с книгами.
+ * Repository for works with books
  */
 class LibsRepository
 {
     /**
-     * Возвращает список книг по указанному терму поиска.
-     *
-     * @param string $term Терм поиска.
+     * Return books list on term search.
+     * @param string $term term search.
      * @return
      */
     public function getByNameOrAuthor(string $term)

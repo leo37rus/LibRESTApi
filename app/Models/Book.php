@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $author
  * @property string $year
+ * @property bool $access
  */
 class Book extends Model
 {

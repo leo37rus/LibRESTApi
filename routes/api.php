@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\V1\LibController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\ListingController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route::get('/approvals', [ListingController::class, 'show'])->middleware('role:super-admin');
 
+Route::middleware('role:admin')->group(function() {
+    Route::prefix('v1')->group(function () {
+        Route::apiResource('book', LibController::class);
+        Route::get('book', [LibController::class, 'getList']);
+    });
+});
 
-Route::prefix('v1')->group(function () {
-    Route::apiResource('books', \App\Http\Controllers\Api\V1\LibController::class);
-    Route::get('books', [\App\Http\Controllers\Api\V1\LibController::class, 'getList']);
+Route::middleware('role:user')->group(function() {
+    Route::prefix('v1/book/{book}')->group(function () {
+        Route::post('reserve', [LibController::class, 'reserve']);
+        Route::post('unreserve', [LibController::class, 'unreserve']);
+    });
 });

@@ -7,7 +7,7 @@ use App\Http\Controllers\Swagger\Controller as Controller;
 /**
  *
  * @OA\Post(
- *     path="/api/v1/books",
+ *     path="/api/v1/book",
  *     summary="Создание",
  *     tags={"Api"},
  *
@@ -36,7 +36,7 @@ use App\Http\Controllers\Swagger\Controller as Controller;
  *     ),
  * ),
  * @OA\Get(
- *      path="/api/v1/books",
+ *      path="/api/v1/book",
  *      summary="Список",
  *      tags={"Api"},
  *
@@ -54,7 +54,7 @@ use App\Http\Controllers\Swagger\Controller as Controller;
  *      ),
  *  ),
  * @OA\Get(
- *       path="/api/v1/books/{book}",
+ *       path="/api/v1/book/{book}",
  *       summary="Получение записи по id",
  *       tags={"Api"},
  *       @OA\Parameter(
@@ -77,9 +77,8 @@ use App\Http\Controllers\Swagger\Controller as Controller;
  *          ),
  *       ),
  * ),
- *
  * @OA\Patch(
- *        path="/api/v1/books/{book}",
+ *        path="/api/v1/book/{book}",
  *        summary="Обновление записи",
  *        tags={"Api"},
  *        @OA\Parameter(
@@ -114,7 +113,7 @@ use App\Http\Controllers\Swagger\Controller as Controller;
  *        ),
  * ),
  * @OA\Delete(
- *        path="/api/v1/books/{book}",
+ *        path="/api/v1/book/{book}",
  *        summary="Удаление записи по id",
  *        tags={"Api"},
  *        @OA\Parameter(
