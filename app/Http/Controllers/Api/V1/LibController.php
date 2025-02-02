@@ -28,6 +28,7 @@ class LibController extends BaseController
      */
     public function getList(LibRequest $request, LibsRepository $repository): AnonymousResourceCollection
     {
+
         if ($request->getTerm()) {
             return LibResource::collection($repository->getByNameOrAuthor($request->getTerm()));
         }
