@@ -13,14 +13,12 @@ use App\Services\BookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Response;
-use App\Http\Library\ApiHelpers;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 
 class LibController extends BaseController
 {
 
-    use ApiHelpers;
 
     /**
      * Display a listing of the resource.

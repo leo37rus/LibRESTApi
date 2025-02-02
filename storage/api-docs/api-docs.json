@@ -6,13 +6,13 @@
     },
     "paths": {
         "/api/": {},
-        "/api/v1/books": {
+        "/api/v1/book": {
             "get": {
                 "tags": [
                     "Api"
                 ],
                 "summary": "Список",
-                "operationId": "fd8d2f6f500c2bd717c02abacc500b9b",
+                "operationId": "122f2c61509ebcc0f49cdc1b2c74e885",
                 "responses": {
                     "404": {
                         "description": "Not found",
@@ -50,14 +50,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
                     "Api"
                 ],
                 "summary": "Создание",
-                "operationId": "9463efd2c97c8d8eb591c39f1c898348",
+                "operationId": "9bbcb64d84d7ab9b553fbc16faba8505",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -119,16 +124,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/v1/books/{book}": {
+        "/api/v1/book/{book}": {
             "get": {
                 "tags": [
                     "Api"
                 ],
                 "summary": "Получение записи по id",
-                "operationId": "91aceba760be808135d300a1102bcac5",
+                "operationId": "8e0ddddf5bea96241522354685bb2757",
                 "parameters": [
                     {
                         "name": "book",
@@ -172,14 +182,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
                     "Api"
                 ],
                 "summary": "Удаление записи по id",
-                "operationId": "1222641716984adcf83455b472050856",
+                "operationId": "f865c5c998701b113e59b3b952a830d6",
                 "parameters": [
                     {
                         "name": "book",
@@ -206,14 +221,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
                     "Api"
                 ],
                 "summary": "Обновление записи",
-                "operationId": "9c78d7b4ceb9a2066a0be43102ffeb55",
+                "operationId": "47c7863c76402a341545e288ef283be6",
                 "parameters": [
                     {
                         "name": "book",
@@ -284,7 +304,76 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/book/{book}/reserve": {
+            "post": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Бронирование книги",
+                "operationId": "e6a1198d6d7ce70bc8eeafdcf4e3fa35",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/book/{book}/unreserve": {
+            "post": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Возврат книги",
+                "operationId": "3f957efe8f920128427ffc4bfd879d05",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     },
