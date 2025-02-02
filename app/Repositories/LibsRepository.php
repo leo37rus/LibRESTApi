@@ -20,10 +20,10 @@ class LibsRepository
      */
     public function getByNameOrAuthor(string $term)
     {
-        return DB::table('libs')
+        return DB::table('books')
             ->select('*')
-            ->where('book_author', 'like', "%$term%")
-            ->orWhere('book_name', 'like', "%$term%")
+            ->where('author', 'like', "%$term%")
+            ->orWhere('name', 'like', "%$term%")
             ->get();
     }
 }

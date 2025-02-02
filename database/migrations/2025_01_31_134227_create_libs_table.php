@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('libs', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('book_name');
-            $table->string('book_author')->nullable();
-            $table->string('book_year');
-            $table->boolean('book_access')->default(true);
+            $table->string('name');
+            $table->string('author')->nullable();
+            $table->string('year');
+            $table->boolean('access')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('libs');
+        Schema::dropIfExists('books');
     }
 };

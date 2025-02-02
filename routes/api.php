@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('libs', \App\Http\Controllers\Api\V1\LibController::class);
-    Route::get('libs', [\App\Http\Controllers\Api\V1\LibController::class, 'getList']);
+    Route::apiResource('books', \App\Http\Controllers\Api\V1\LibController::class);
+    Route::get('books', [\App\Http\Controllers\Api\V1\LibController::class, 'getList']);
 });

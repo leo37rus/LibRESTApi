@@ -6,17 +6,292 @@
     },
     "paths": {
         "/api/": {},
-        "/api/v1/libs": {
-            "post": {
-                "summary": "Создание",
-                "operationId": "395a43dbf9e9968707e0592909bac41a",
-                "requestBody": {},
+        "/api/v1/books": {
+            "get": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Список",
+                "operationId": "fd8d2f6f500c2bd717c02abacc500b9b",
                 "responses": {
-                    "200": {
-                        "description": "Ok"
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "5"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "The Picture of Dorian Gray"
+                                                    },
+                                                    "author": {
+                                                        "type": "string",
+                                                        "example": "Oscar Wilde"
+                                                    },
+                                                    "year": {
+                                                        "type": "string",
+                                                        "example": "1890"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Создание",
+                "operationId": "9463efd2c97c8d8eb591c39f1c898348",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "The Picture of Dorian Gray"
+                                            },
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Oscar Wilde"
+                                            },
+                                            "year": {
+                                                "type": "string",
+                                                "example": "1890"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "The Picture of Dorian Gray"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Oscar Wilde"
+                                                },
+                                                "year": {
+                                                    "type": "string",
+                                                    "example": "1890"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/books/{book}": {
+            "get": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Получение записи по id",
+                "operationId": "91aceba760be808135d300a1102bcac5",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "The Picture of Dorian Gray"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Oscar Wilde"
+                                                },
+                                                "year": {
+                                                    "type": "string",
+                                                    "example": "1890"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Удаление записи по id",
+                "operationId": "1222641716984adcf83455b472050856",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book removed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Обновление записи",
+                "operationId": "9c78d7b4ceb9a2066a0be43102ffeb55",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": 5
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "The Picture of Dorian Gray"
+                                            },
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Oscar Wilde"
+                                            },
+                                            "year": {
+                                                "type": "string",
+                                                "example": "1890"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "5"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "The Picture of Dorian Gray"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Oscar Wilde"
+                                                },
+                                                "year": {
+                                                    "type": "string",
+                                                    "example": "1890"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Api",
+            "description": "Api"
+        }
+    ]
 }

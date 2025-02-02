@@ -19,9 +19,10 @@ class LibResource extends JsonResource
         $resource = $this->resource;
 
         return [
-            'name' => $resource->book_name,
-            'author' => $resource->book_author,
-            'year' => $resource->book_year,
+            'id'=> $resource->id,
+            'name' => $resource->name,
+            'author' => $resource->author,
+            'year' => $resource->year,
         ];
     }
 }

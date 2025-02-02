@@ -7,7 +7,7 @@ use App\Http\Requests\LibRequest;
 use App\Http\Requests\StoreLibRequest;
 use App\Http\Requests\UpdateLibRequest;
 use App\Http\Resources\V1\LibResource;
-use App\Models\Lib;
+use App\Models\Book;
 use App\Repositories\LibsRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Response;
@@ -26,11 +26,12 @@ class LibController extends BaseController
     public function getList(LibRequest $request, LibsRepository $repository): AnonymousResourceCollection
     {
 
+
         if ($request->getTerm()) {
             return LibResource::collection($repository->getByNameOrAuthor($request->getTerm()));
         }
 
-        return LibResource::collection(Lib::all());
+        return LibResource::collection(Book::all());
     }
 
 
@@ -39,40 +40,41 @@ class LibController extends BaseController
      */
     public function store(StoreLibRequest $request)
     {
-        $libs = Lib::create($request->all());
-        return new LibResource($libs);
+        $books = Book::create($request->all());
+        return new LibResource($books);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Book $book): LibResource
     {
-        $lib = Lib::find($id);
+        /*$lib = Lib::find($id);
         if (is_null($lib))
         {
             abort(404, 'Not found.');
-        }
-        return new LibResource($lib);
+        }*/
+        return new LibResource($book);
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLibRequest $request, Lib $lib)
+    public function update(UpdateLibRequest $request, Book $book): LibResource
     {
-        $lib->update($request->all());
-        return new LibResource($lib);
+        $book->update($request->all());
+        return new LibResource($book);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lib $lib)
+    public function destroy(Book $book)
     {
-        $lib->delete();
-
-        return Response::noContent();
+        $book->delete();
+        return response()->json([
+            'message' => 'Book removed'
+        ]);
     }
 }
